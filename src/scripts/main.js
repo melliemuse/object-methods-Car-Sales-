@@ -151,14 +151,20 @@ searchInput.addEventListener('keyup', event => {
                 console.log(entries)
                 console.log(searchTerm)
                 if (entries.includes(searchTerm)) {
+                    agentMatch = true
                     console.log(agentMatch)
+                    console.log(entries)
                     return agentMatch
                 }
             }
         })
         console.log(agentSearchResults)
-        displayContainer.innerHTML += agentSearchResults
-
+        agentSearchResults.forEach((searchResult) => {
+            for (const result of Object.entries(searchResult)) {
+                console.log(result)
+                displayContainer.innerHTML += `<div>${result[0] }: ${result[1]}</div>`
+            }
+        })
 
             }
         });
