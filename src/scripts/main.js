@@ -114,26 +114,52 @@ const salesByWeek = [
 // Display all keys and values for the car sold.
 // Display the gross profit made on the sale.
 
-console.log(salesByWeek)
 
 const displayContainer = document.querySelector('.contents')
-displayContainer.innerHTML += `<h1>Weekly Sales Report</h1>`
-let displayHTML;
+// displayContainer.innerHTML += `<h1>Weekly Sales Report</h1>`
+// let displayHTML;
 
-salesByWeek.forEach(saleByWeek => {
-    let firstName = saleByWeek.sales_agent.first_name
-    let lastName = saleByWeek.sales_agent.last_name
-    let gross_profits = saleByWeek.gross_profit
-    let vehicle= ``
-    for (let entry of Object.entries(saleByWeek['vehicle'])) {
-        console.log(entry)
-        vehicle += `<div>${entry[0]}: ${entry[1]}</div>`
-        
-        displayHTML = `<h3>${firstName} ${ lastName}</h3>
-        ${vehicle}
-        <h4>Profit: $${gross_profits}</h4>
-        `
-    }
-    
-    displayContainer.innerHTML += displayHTML
-    })
+// salesByWeek.forEach(saleByWeek => {
+//     let firstName = saleByWeek.sales_agent.first_name
+//     let lastName = saleByWeek.sales_agent.last_name
+//     let gross_profits = saleByWeek.gross_profit
+//     let vehicle= ``
+//     for (let entry of Object.entries(saleByWeek['vehicle'])) {
+//         console.log(entry)
+//         vehicle += `<div>${entry[0]}: ${entry[1]}</div>`
+
+//         displayHTML = `<h3>${firstName} ${ lastName}</h3>
+//         ${vehicle}
+//         <h4>Profit: $${gross_profits}</h4>
+//         `
+//     }
+
+//     displayContainer.innerHTML += displayHTML
+//     })
+
+const searchInput = document.querySelector("#searchInput")
+
+searchInput.addEventListener('keyup', event => {
+    if (event.keyCode === 13) {
+        const searchTerm = event.target.value
+        const agents = salesByWeek.map(sale => {
+            return sale['sales_agent'] })
+        console.log(agents)
+        const agentSearchResults = agents.filter(agent => {
+            let agentMatch = false
+            for(const entries of Object.entries(agent)) {
+                console.log(entries)
+                console.log(searchTerm)
+                if (entries.includes(searchTerm)) {
+                    console.log(agentMatch)
+                    return agentMatch
+                }
+            }
+        })
+        console.log(agentSearchResults)
+        displayContainer.innerHTML += agentSearchResults
+
+
+            }
+        });
+   
