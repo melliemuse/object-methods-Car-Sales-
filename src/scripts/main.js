@@ -142,13 +142,16 @@ const searchInput = document.querySelector("#searchInput")
 searchInput.addEventListener('keyup', event => {
     if (event.keyCode === 13) {
         const searchTerm = event.target.value
-        const agents = salesByWeek.map(sale => {
-            return sale['sales_agent'] })
-        console.log(agents)
-        const agentSearchResults = agents.filter(agent => {
+        // const agents = salesByWeek.map(sale => {
+        //     return sale['sales_agent'] })
+        // console.log(agents)
+        console.log(salesByWeek)
+        const agentSearchResults = salesByWeek.filter(sales => {
+            console.log(sales)
             let agentMatch = false
-            for(const entries of Object.entries(agent)) {
+            for(const entries of Object.entries(sales["sales_agent"])) {
                 console.log(entries)
+                // console.log(entries["sales_agent"])
                 console.log(searchTerm)
                 if (entries.includes(searchTerm)) {
                     agentMatch = true
@@ -159,13 +162,15 @@ searchInput.addEventListener('keyup', event => {
             }
         })
         console.log(agentSearchResults)
-        agentSearchResults.forEach((searchResult) => {
-            for (const result of Object.entries(searchResult)) {
-                console.log(result)
-                displayContainer.innerHTML += `<div>${result[0] }: ${result[1]}</div>`
+            for (const entries of Object.entries(agentSearchResults)) {
+                console.log(entries)
+                displayContainer.innerHTML += 
+                `
+                <h1>${entries[1].sales_agent.first_name} ${entries[1].sales_agent.last_name}</h1>
+                <div>Email: ${entries[1].sales_agent.email}</div>
+                <div>Sale: $${entries[1].gross_profit}</div>
+                `
+            }
             }
         })
-
-            }
-        });
    
